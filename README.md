@@ -1,2 +1,2 @@
 # remember
-Repo used to developer remember app.
+Repo used to develop remember app.
