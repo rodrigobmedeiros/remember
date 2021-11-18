@@ -34,7 +34,7 @@ class Contact(models.Model):
 class Reminder(models.Model):
 
     date = models.DateField()
-    descritpion = models.CharField(max_length=200)
+    description = models.CharField(max_length=200)
 
     # Include some default option to define the event type.
     event_type = models.CharField(max_length=30, choices=EventType.choices, default=EventType.BIRTHDAY)
@@ -42,6 +42,7 @@ class Reminder(models.Model):
 
     # Considering that yearly reminders are a specific case of monthly reminders, I only include a boolean to define if a will be send monthly or not.
     monthly_reminder = models.BooleanField(default=False)
+    yearly_reminder = models.BooleanField(default=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
 class UserDefinedEventType(models.Model):
