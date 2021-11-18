@@ -55,3 +55,7 @@ class Event(models.Model):
     # instead of delete a reminder, only mark as deleted.
     sending_datetime = models.DateTimeField(auto_now_add=True)
     reminder_event = models.ForeignKey(Reminder, on_delete=models.DO_NOTHING)
+
+class Nothing():
+    # Only to create a pull request
+    pass
