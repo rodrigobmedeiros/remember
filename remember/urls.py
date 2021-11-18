@@ -17,5 +17,5 @@ from django.contrib import admin
 from django.urls import path
 
 urlpatterns = [
-    path('remember-admin-painel/', admin.site.urls),
+    path('remember-admin-panel/', admin.site.urls),
 ]
