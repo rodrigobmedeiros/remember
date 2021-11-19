@@ -46,7 +46,7 @@ class EventType(models.Model):
     event_type = models.CharField(max_length=30, choices=EventType.choices, default=EventType.BIRTHDAY)
 
     # I'm not shure if I want to delete the event type because I can use that information maybe to improve options in the future.
-    reminder_event = models.ForeignKey(Reminder, on_delete=models.DO_NOTHING)
+    reminder_event = models.ForeignKey(Reminder, on_delete=models.SET_NULL)
 
 class Event(models.Model):
 
@@ -55,4 +55,4 @@ class Event(models.Model):
     # instead of delete a reminder, only mark as deleted.
     sending_datetime = models.DateTimeField(auto_now_add=True)
     successfully_sent = models.BooleanField(default=False)
-    reminder_event = models.ForeignKey(Reminder, on_delete=models.DO_NOTHING)
+    reminder_event = models.ForeignKey(Reminder, on_delete=models.SET_NULL)
