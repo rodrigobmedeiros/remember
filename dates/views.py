@@ -4,6 +4,7 @@ from django.shortcuts import render
 
 def include_reminder(request):
 
-    return render("""
-    HELLO WORLD
-    """)
+    return render(
+        request,
+        template_name="hello_world.html"
+    )
