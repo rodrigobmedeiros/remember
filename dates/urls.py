@@ -19,5 +19,5 @@ from django.urls import path
 from dates import views
 
 urlpatterns = [
-    path('include_reminder/', views.include_reminder, name='include_reminder'),
+    path('add_reminder/', views.add_reminder, name='add_reminder'),
 ]
