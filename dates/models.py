@@ -43,9 +43,10 @@ class Reminder(models.Model):
     description = models.CharField(max_length=200)
     related_person_name = models.CharField(max_length=100)
     monthly_reminder = models.BooleanField(default=False)
-    yearly_reminder = models.BooleanField(default=True)
+    yearly_reminder = models.BooleanField(default=False)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    event_type = models.ForeignKey(EventType, on_delete=models.SET_NULL, null=True)
+    # event_type = models.ForeignKey(EventType, on_delete=models.SET_NULL, null=True)
+    event_type = models.CharField(max_length=30, choices=EventTypeOptions.choices, default=EventTypeOptions.BIRTHDAY)
 
 class Event(models.Model):
 
