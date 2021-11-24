@@ -42,6 +42,9 @@ INSTALLED_APPS = [
     'dates'
 ]
 
+# Adding a bootstrap template
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
