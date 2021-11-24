@@ -1,5 +1,5 @@
 from .models import Reminder
-from django.forms import ModelForm
+from django.forms import ModelForm, widgets
 
 class ReminderForm(ModelForm):
 
@@ -14,3 +14,7 @@ class ReminderForm(ModelForm):
             'yearly_reminder',
             'user'
         )
+
+        widgets = {
+            'date': widgets.DateInput(attrs={'type': 'date'})
+        }
