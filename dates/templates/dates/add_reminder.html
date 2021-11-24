@@ -17,11 +17,12 @@
     </head>
 
     <body>
+        {% load crispy_forms_tags %}
         <div class="container">
             <h2 class="my-4">Add a new Reminder</h2>
             <form method="post" enctype="multipart/form-data">
                 {% csrf_token %}
-                {{ reminder_form }}
+                {{ reminder_form|crispy }}
                 <button class="btn btn-primary my-4" type="submit">Submit</button>
             </form>
         </div>
