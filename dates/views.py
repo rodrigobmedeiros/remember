@@ -1,7 +1,13 @@
 from django.shortcuts import render
 from django.contrib import messages
 from .forms import ReminderForm
+from django.contrib.auth.models import User
+from django.contrib.auth.decorators import login_required
+
+
 # Create your views here.
+
+user = User.objects.all().first()
 
 def add_reminder(request):
 
@@ -11,6 +17,8 @@ def add_reminder(request):
 
         if reminder_form.is_valid():
 
+            reminder_form = reminder_form.save(commit=False)
+            reminder_form.user = user
             reminder_form.save()
             messages.success(request, ('Your reminder was successfully added!'))
 
