@@ -37,9 +37,13 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
     'phonenumber_field',
     'crispy_forms',
-    'dates'
+    'dates',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount'
 ]
 
 # Adding a bootstrap template
@@ -73,8 +77,14 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'remember.wsgi.application'
+AUTHENTICATION_BACKENDS = [
+    'django_contrib.auth.backends.ModelBackend',
+    'allauth.account.auth_backends.AuthenticationBackend',
+]
 
+SITE_ID = 1
+
+WSGI_APPLICATION = 'remember.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
