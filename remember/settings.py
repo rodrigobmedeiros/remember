@@ -38,12 +38,14 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.sites',
+    # 3rd party
     'phonenumber_field',
     'crispy_forms',
-    'dates',
     'allauth',
     'allauth.account',
     'allauth.socialaccount'
+    # own apps
+    'dates',    
 ]
 
 # Adding a bootstrap template
