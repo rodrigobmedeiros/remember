@@ -87,6 +87,10 @@ AUTHENTICATION_BACKENDS = [
     'allauth.account.auth_backends.AuthenticationBackend',
 ]
 
+EMAIL_BACKEND = 'django.core.mail.backends.console.ModelBackend'
+
+
+
 SITE_ID = 1
 
 WSGI_APPLICATION = 'remember.wsgi.application'
