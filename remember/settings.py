@@ -89,7 +89,7 @@ AUTHENTICATION_BACKENDS = [
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.ModelBackend'
 
-
+LOGIN_REDIRECT_URL = '/add_reminder/'
 
 SITE_ID = 1
 
