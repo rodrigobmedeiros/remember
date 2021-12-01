@@ -12,7 +12,6 @@ class ReminderForm(ModelForm):
             'description',
             'monthly_reminder',
             'yearly_reminder',
-            'user'
         )
 
         widgets = {

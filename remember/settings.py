@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/3.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
-
+import os
 from pathlib import Path
 from decouple import config
 
@@ -37,9 +37,16 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
+    # 3rd party
     'phonenumber_field',
     'crispy_forms',
-    'dates'
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'bootstrap5',
+    # own apps
+    'dates',    
 ]
 
 # Adding a bootstrap template
@@ -60,7 +67,10 @@ ROOT_URLCONF = 'remember.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [
+            os.path.join(BASE_DIR, 'remember/templates'),
+            os.path.join(BASE_DIR, 'remember/templates/allauth')
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -73,8 +83,19 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'remember.wsgi.application'
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
+    'allauth.account.auth_backends.AuthenticationBackend',
+]
 
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+LOGIN_REDIRECT_URL = '/add_reminder/'
+ACCOUNT_LOGOUT_REDIRECT_URL ='/accounts/login'
+
+SITE_ID = 1
+
+WSGI_APPLICATION = 'remember.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
