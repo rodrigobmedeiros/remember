@@ -32,4 +32,7 @@ def add_reminder(request):
 @login_required
 def main(request):
 
-    return HttpResponse("<p>Hello World</p>")
+    return render(
+        request,
+        template_name="dates/main.html"
+    )
