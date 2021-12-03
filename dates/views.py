@@ -32,7 +32,7 @@ def add_reminder(request):
 
 @login_required
 def main(request):
-
+    #TODO: Filter reminders based on actual month.
     user = request.user
     reminders = Reminder.objects.filter(user=user)
 
