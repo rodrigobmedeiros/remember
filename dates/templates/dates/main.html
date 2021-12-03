@@ -1,18 +1,24 @@
-<!DOCTYPE html>
-<html lan='en'>
-    <head>
-        <title>Remember App</title>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+{% extends 'base/base_app.html'%}
 
-        {# Load the tag library #}
-        {% load bootstrap5 %}
 
-        {# Loac CCSS and JavaScript #}
-        {% bootstrap_css %}
-        {% bootstrap_javascript %}
+{% block content %}
 
-        {# Display django.contrib.messages as Bootstrap alerts #}
-        {% bootstrap_messages %}
-    </head>    
-</html>
+    {% for reminder in reminders %}
+
+        <div class="card mt-5">
+
+            <div class="card-body">
+                {{ reminder.related_person_name }}
+            </div>
+            <div class="card-footer">
+                {{ reminder.user }}
+            </div>
+            <div class="card-footer">
+                {{ reminder.date }}
+            </div>
+
+        </div>
+
+    {% endfor %}
+
+{% endblock %}

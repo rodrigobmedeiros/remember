@@ -1,9 +1,10 @@
 from django.http.response import HttpResponse
 from django.shortcuts import render
 from django.contrib import messages
-from .forms import ReminderForm
 from django.contrib.auth.decorators import login_required
 
+from .forms import ReminderForm
+from .models import Reminder
 
 # Create your views here.
 
@@ -32,7 +33,16 @@ def add_reminder(request):
 @login_required
 def main(request):
 
+    user = request.user
+    reminders = Reminder.objects.filter(user=user)
+
+    context = {
+        'reminders': reminders
+    }
+
+
     return render(
         request,
-        template_name="dates/main.html"
+        template_name="dates/main.html",
+        context=context
     )
