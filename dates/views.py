@@ -1,3 +1,4 @@
+from django.http.response import HttpResponse
 from django.shortcuts import render
 from django.contrib import messages
 from .forms import ReminderForm
@@ -27,3 +28,8 @@ def add_reminder(request):
         template_name='dates/add_reminder.html',
         context={'reminder_form': reminder_form}
     )
+
+@login_required
+def main(request):
+
+    return HttpResponse("<p>Hello World</p>")
