@@ -1,7 +1,13 @@
 {% extends 'base/base_app.html'%}
+ 	
+{% block extra_head %}
+    <link rel="stylesheet" href="dates/style/css/calendar.css">
+{% endblock %}
 
 {% block content %}
     {% include 'base/menu.html' %}
+
+    <div id="app"></div>    
 
     {% for reminder in reminders %}
         <div class="card mt-5">
@@ -12,4 +18,8 @@
             </div>
         </div>
     {% endfor %}
+{% endblock %}
+
+{% block extra_body %}
+    <script src="dates/style/javascript/index.js"></script>
 {% endblock %}
