@@ -1,13 +1,14 @@
 {% extends 'base/base_app.html'%}
- 	
+{% load static %}
+
 {% block extra_head %}
-    <link rel="stylesheet" href="dates/style/css/calendar.css">
+    <link rel="stylesheet" href="{% static 'css/calendar.css' %}">
 {% endblock %}
 
 {% block content %}
     {% include 'base/menu.html' %}
 
-    <div id="app"></div>    
+    {% include 'base/calendar.html'%}
 
     {% for reminder in reminders %}
         <div class="card mt-5">
@@ -21,5 +22,6 @@
 {% endblock %}
 
 {% block extra_body %}
-    <script src="dates/style/javascript/index.js"></script>
+    <script src="{% static 'js/index.js' %}"></script>
+    <script src="https://unpkg.com/daysjs"></script>
 {% endblock %}
