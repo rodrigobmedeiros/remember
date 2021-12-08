@@ -7,6 +7,10 @@ body {
   --day-label-size: 20px;
 }
 
+ol li {
+  list-style: none;
+}
+
 .calendar-month {
   position: relative;
   /* Color of the day cell borders */
