@@ -22,6 +22,8 @@
 {% endblock %}
 
 {% block extra_body %}
-    <script src="{% static 'js/index.js' %}"></script>
-    <script src="https://unpkg.com/daysjs"></script>
+    <script src="https://unpkg.com/dayjs@1.8.21/dayjs.min.js"></script>
+    <script src="https://unpkg.com/dayjs@1.8.21/plugin/weekday.js"></script>
+    <script src="https://unpkg.com/dayjs@1.8.21/plugin/weekOfYear.js"></script>
+    <script src="{% static 'js/index.js'%}"></script>
 {% endblock %}
