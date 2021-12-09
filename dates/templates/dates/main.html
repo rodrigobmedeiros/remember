@@ -1,0 +1,52 @@
+{% extends 'base.html'%}
+{% load static %}
+
+{% block head_title %}My Reminders{% endblock %}
+
+{% block extra_head %}
+    <link rel="stylesheet" href="{% static 'css/calendar.css' %}">
+{% endblock %}
+
+{% block content %}
+    {% include 'base/menu.html' %}
+
+    {% include 'base/calendar.html'%}
+
+    {% for reminder in reminders %}
+        <div class="card mt-5">
+            <div class="card-body">
+                <p>Related Name: {{ reminder.related_person_name }}</p>
+                <p>Description: {{ reminder.description }}</p>
+                <p>Date: {{ reminder.date }}</p>
+            </div>
+        </div>
+    {% endfor %}
+
+
+    <div class="modal" id="reminderModal" tabindex="-1">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Modal title</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <p>Modal body text goes here.</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary">Save changes</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+{% endblock %}
+
+{% block extra_body %}
+    <script src="https://unpkg.com/dayjs@1.8.21/dayjs.min.js"></script>
+    <script src="https://unpkg.com/dayjs@1.8.21/plugin/weekday.js"></script>
+    <script src="https://unpkg.com/dayjs@1.8.21/plugin/weekOfYear.js"></script>
+    <script src="{% static 'js/index.js'%}"></script>
+    <script src="{% static 'js/script.js'%}"></script>
+{% endblock %}

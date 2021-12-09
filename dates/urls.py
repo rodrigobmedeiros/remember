@@ -20,4 +20,5 @@ from dates import views
 
 urlpatterns = [
     path('add_reminder/', views.add_reminder, name='add_reminder'),
+    path('main/', views.main, name='main')
 ]

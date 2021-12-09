@@ -46,11 +46,11 @@ INSTALLED_APPS = [
     'allauth.socialaccount',
     'bootstrap5',
     # own apps
-    'dates',    
+    'dates',
 ]
 
 # Adding a bootstrap template
-CRISPY_TEMPLATE_PACK = 'bootstrap4'
+CRISPY_TEMPLATE_PACK = 'bootstrap5'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -90,7 +90,7 @@ AUTHENTICATION_BACKENDS = [
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
-LOGIN_REDIRECT_URL = '/add_reminder/'
+LOGIN_REDIRECT_URL = '/main/'
 ACCOUNT_LOGOUT_REDIRECT_URL ='/accounts/login'
 
 SITE_ID = 1
