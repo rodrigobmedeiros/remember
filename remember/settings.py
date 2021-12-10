@@ -50,7 +50,7 @@ INSTALLED_APPS = [
 ]
 
 # Adding a bootstrap template
-CRISPY_TEMPLATE_PACK = 'bootstrap5'
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 BOOTSTRAP5 = {
     "css_url": {
