@@ -22,17 +22,6 @@ def add_reminder(request):
             reminder_form.save()
             messages.success(request, ('Your reminder was successfully added!'))
 
-    reminder_form = ReminderForm()
-
-    return render(
-        request=request,
-        template_name='dates/add_reminder.html',
-        context={'reminder_form': reminder_form}
-    )
-
-@login_required
-def main(request):
-    #TODO: Filter reminders based on actual month.
     user = request.user
     reminders = Reminder.objects.filter(user=user)
 
@@ -40,9 +29,33 @@ def main(request):
         'reminders': reminders
     }
 
+    return render(
+        request=request,
+        template_name='dates/main.html',
+        context=dict(**{'reminder_form': reminder_form}, **context)
+    )
+
+@login_required
+def main(request):
+    if request.method == 'POST':
+
+        reminder_form = ReminderForm(request.POST) 
+
+        if reminder_form.is_valid():
+
+            reminder_form = reminder_form.save(commit=False)
+            reminder_form.user = request.user
+            reminder_form.save()
+            messages.success(request, ('Your reminder was successfully added!'))
+
+    user = request.user
+    reminders = Reminder.objects.filter(user=user)
+
+    context = {
+        'reminders': reminders
+    }
 
     return render(
-        request,
-        template_name="dates/main.html",
-        context=context
-    )
+        request=request,
+        template_name='dates/main.html',
+        context=context)
