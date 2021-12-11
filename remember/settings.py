@@ -50,7 +50,40 @@ INSTALLED_APPS = [
 ]
 
 # Adding a bootstrap template
-CRISPY_TEMPLATE_PACK = 'bootstrap5'
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
+BOOTSTRAP5 = {
+    "css_url": {
+        "href": "https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css",
+        "integrity": "sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I",
+        "crossorigin": "anonymous",
+    },
+
+    # The complete URL to the Bootstrap JavaScript file
+    "javascript_url": {
+        "url": "https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js",
+        "integrity": "sha384-oesi62hOLfzrys4LxRF63OJCXdXDipiYWBnvTl9Y9/TRlw5xlKIEHpNyvvDShgf/",
+        "crossorigin": "anonymous",
+    },
+    "theme_url": None,
+    'javascript_in_head': False,
+    'horizontal_label_class': 'col-md-3',
+    'horizontal_field_class': 'col-md-9',
+    'set_placeholder': True,
+    'required_css_class': '',
+    'error_css_class': 'is-invalid',
+    'success_css_class': 'is-valid',
+    'formset_renderers':{
+        'default': 'bootstrap5.renderers.FormsetRenderer',
+    },
+    'form_renderers': {
+        'default': 'bootstrap5.renderers.FormRenderer',
+    },
+    'field_renderers': {
+        'default': 'bootstrap5.renderers.FieldRenderer',
+        'inline': 'bootstrap5.renderers.InlineFieldRenderer',
+    },
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
