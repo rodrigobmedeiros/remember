@@ -31,9 +31,12 @@ document.getElementById("calendar-days").addEventListener("click",function(e) {
     // TODO invoke the bootstrap modal
     var myModal = new bootstrap.Modal(document.getElementById('reminderModal'));
     var dateField = document.getElementById("id_date");
-    myModal.show();
-    
-    dateField.value = completeDate;
+
+
+    if (e.target.className != "calendar-day calendar-day--not-current"){
+      myModal.show();
+      dateField.value = completeDate;
+    }
   }
 });
 
