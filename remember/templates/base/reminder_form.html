@@ -1,6 +1,7 @@
 <div class="container">
     <form method="post" enctype="multipart/form-data" action="http://127.0.0.1:8000/main/">
-        <input type="hidden" name="csrfmiddlewaretoken" value="nt119NMU5DEhRp0aoOntC2AZ1yTz9qyAkeiyXMY3d0JSYyWffBVgZMKwRalcKSo0">
+        {% csrf_token %}
+        
 
         <div id="div_id_related_person_name" class="form-group"> 
             <label for="id_related_person_name" class=" requiredField">
