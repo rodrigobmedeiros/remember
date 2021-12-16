@@ -5,6 +5,7 @@
 
 {% block extra_head %}
     <link rel="stylesheet" href="{% static 'css/calendar.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 {% endblock %}
 
 {% block content %}
@@ -18,10 +19,11 @@
     <div class="row h-100 justify-content-center align-items-center">
       <div class="col-6">
         {% for reminder in reminders %}
-        
             <div class="card border border-primary shadow-0 mb-3" style="max-width: 48rem;">
               <div class="card-body text-primary">
-                <h5 class="card-title"><span style="font-weight: bold;">Related Name:</span> {{ reminder.related_person_name }}</h5>
+                <h5 class="card-title"><span style="font-weight: bold; margin: 0px;">Related Name:</span> {{ reminder.related_person_name }}
+                  <a class="btn btn-link" style="float: right;" href="#" role="button"><i class="fa fa-trash"></i></a>
+                </h5>
                 <hr>
                 <p class="card-text"><span style="font-weight: bold;">Description:</span> {{ reminder.description }}</p>
                 <hr>
