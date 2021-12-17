@@ -21,13 +21,13 @@ document.getElementById("calendar-days").addEventListener("click",function(e) {
     var monthYear = document.getElementById("selected-month").textContent.split(' ')
     var month = month_mapper.get(monthYear[0]);
     var year = monthYear[1];
-      
+
     if (day.length == 1) {
       day = '0' + day
     }
 
     var completeDate = year + '-' + month + '-' + day
-    
+
     // TODO invoke the bootstrap modal
     var myModal = new bootstrap.Modal(document.getElementById('reminderModal'));
     var dateField = document.getElementById("id_date");
@@ -41,3 +41,6 @@ document.getElementById("calendar-days").addEventListener("click",function(e) {
 });
 
 
+function getMonthYear(){
+  return document.getElementById("selected-month").innerText;
+}
