@@ -48,6 +48,10 @@ class Reminder(models.Model):
     # event_type = models.ForeignKey(EventType, on_delete=models.SET_NULL, null=True)
     event_type = models.CharField(max_length=30, choices=EventTypeOptions.choices, default=EventTypeOptions.BIRTHDAY)
 
+    class Meta:
+        # use this construction to order by day based on date field.
+        ordering = ['date__day']
+
 class Event(models.Model):
 
     sending_datetime = models.DateTimeField(auto_now_add=True)
