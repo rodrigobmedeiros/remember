@@ -31,11 +31,21 @@ document.getElementById("calendar-days").addEventListener("click",function(e) {
     // TODO invoke the bootstrap modal
     var myModal = new bootstrap.Modal(document.getElementById('reminderModal'));
     var dateField = document.getElementById("id_date");
+    var relaterPersonField = document.getElementById("id_related_person_name");
+    var description = document.getElementById("id_description");
+    var monthlyReminder = document.getElementById("id_monthly_reminder");
+    var yearlyReminder = document.getElementById("id_yearly_reminder");
+    var eventType = document.getElementById("id_event_type");
 
 
     if (e.target.className != "calendar-day calendar-day--not-current"){
       myModal.show();
       dateField.value = completeDate;
+      relaterPersonField.value = "";
+      description.value = "";
+      monthlyReminder = false;
+      yearlyReminder = false;
+      eventType = "Birthday"
     }
   }
 });

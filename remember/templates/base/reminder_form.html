@@ -1,8 +1,6 @@
 <div class="container">
     <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
-        
-
         <div id="div_id_related_person_name" class="form-group"> 
             <label for="id_related_person_name" class=" requiredField">
                 Related person name<span class="asteriskField">*</span> 
@@ -58,6 +56,15 @@
             </div> 
         </div>
 
-        <button class="btn btn-primary my-4" type="submit">Submit</button>
+        <button 
+            class="btn btn-primary my-4" 
+            type="submit"
+            hx-post="{% url  'add-reminder'%}"
+            hx-trigger="click"
+            hx-vals='js:{monthYear: getMonthYear()}'
+            hx-target="#reminderWrapper"
+            hx-swap="innerHTML"
+            data-dismiss="modal"
+        >Submit</button>
     </form>
 </div>

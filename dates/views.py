@@ -92,3 +92,34 @@ def delete_reminder(request, id):
         request=request,
         template_name='dates/reminders.html',
         context=context)
+
+@login_required
+def add_reminder(request):
+
+    user = request.user
+
+    reminder_form = ReminderForm(request.POST)
+
+    if reminder_form.is_valid():
+
+        reminder_form = reminder_form.save(commit=False)
+        reminder_form.user = user
+        reminder_form.save()
+        messages.success(request, ('Your reminder was successfully added!'))
+
+    month_name, year = request.POST["monthYear"].split(" ")
+    month = MONTH_NAMES_TO_NUMBERS[month_name[:3]]
+
+    reminders = Reminder.objects.filter(
+        user=user,
+        date__year__lte=year,
+        date__month=month
+    )
+
+    context = {
+        "reminders": reminders,
+    }
+    return render(
+        request=request,
+        template_name='dates/reminders.html',
+        context=context)
