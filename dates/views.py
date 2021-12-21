@@ -25,7 +25,9 @@ def reminders(request):
         date__month=month
     )
 
-    context = {"reminders": reminders}
+    context = {
+        "reminders": reminders,
+    }
     return render(
         request=request,
         template_name='dates/reminders.html',
@@ -59,7 +61,7 @@ def main(request):
     )
 
     context = {
-        'reminders': reminders
+        'reminders': reminders,
     }
 
     return render(
