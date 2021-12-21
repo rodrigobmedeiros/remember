@@ -17,22 +17,7 @@
     <br>
 
     <div class="row h-100 justify-content-center align-items-center">
-      <div class="col-6">
-        {% for reminder in reminders %}
-            <div class="card border border-primary shadow-0 mb-3" style="max-width: 48rem;">
-              <div class="card-body text-primary">
-                <h5 class="card-title"><span style="font-weight: bold; margin: 0px;">Related Name:</span> {{ reminder.related_person_name }}
-                  <a class="btn btn-link" style="float: right;" href="{% url  'delete-reminder' reminder.id %}" role="button"><i class="fa fa-trash"></i></a>
-                </h5>
-                <hr>
-                <p class="card-text"><span style="font-weight: bold;">Description:</span> {{ reminder.description }}</p>
-                <hr>
-                <p class="card-text"><span style="font-weight: bold;">Date:</span> {{ reminder.date }}</p>
-              </div>
-            </div>
-        
-        {% endfor %}
-      </div>
+      <div class="col-6" id="reminderWrapper"></div>
     </div>
 
 
@@ -55,6 +40,7 @@
     <script src="https://unpkg.com/dayjs@1.8.21/dayjs.min.js"></script>
     <script src="https://unpkg.com/dayjs@1.8.21/plugin/weekday.js"></script>
     <script src="https://unpkg.com/dayjs@1.8.21/plugin/weekOfYear.js"></script>
+    <script src="https://unpkg.com/htmx.org@1.6.1" integrity="sha384-tvG/2mnCFmGQzYC1Oh3qxQ7CkQ9kMzYjWZSNtrRZygHPDDqottzEJsqS4oUVodhW" crossorigin="anonymous"></script>
     <script src="{% static 'js/index.js'%}"></script>
     <script src="{% static 'js/script.js'%}"></script>
 {% endblock %}
