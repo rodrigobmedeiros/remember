@@ -1,4 +1,5 @@
 import calendar
+import datetime
 
 from django.shortcuts import render, redirect
 from django.contrib import messages
@@ -21,7 +22,8 @@ def reminders(request):
     reminders = Reminder.objects.filter(
         user=user,
         date__year=year,
-        date__month=month)
+        date__month=month
+    )
 
     context = {"reminders": reminders}
     return render(
@@ -33,6 +35,8 @@ def reminders(request):
 @login_required
 def main(request):
 
+    user = request.user
+
     if request.method == 'POST':
 
         reminder_form = ReminderForm(request.POST)
@@ -40,12 +44,19 @@ def main(request):
         if reminder_form.is_valid():
 
             reminder_form = reminder_form.save(commit=False)
-            reminder_form.user = request.user
+            reminder_form.user = user
             reminder_form.save()
             messages.success(request, ('Your reminder was successfully added!'))
 
-    user = request.user
-    reminders = Reminder.objects.filter(user=user)
+    
+    # Get current month and year
+    today = datetime.datetime.now()
+
+    reminders = Reminder.objects.filter(
+        user=user,
+        date__year=today.year,
+        date__month=today.month
+    )
 
     context = {
         'reminders': reminders
