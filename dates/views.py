@@ -21,7 +21,7 @@ def reminders(request):
 
     reminders = Reminder.objects.filter(
         user=user,
-        date__year=year,
+        date__year__lte=year,
         date__month=month
     )
 
@@ -54,7 +54,7 @@ def main(request):
 
     reminders = Reminder.objects.filter(
         user=user,
-        date__year=today.year,
+        date__year__lte=today.year,
         date__month=today.month
     )
 
