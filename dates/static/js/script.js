@@ -1,14 +1,14 @@
 const month_mapper = new Map();
 
-month_mapper.set('January', '1');
-month_mapper.set('February', '2');
-month_mapper.set('March', '3');
-month_mapper.set('April', '4');
-month_mapper.set('May', '5');
-month_mapper.set('June', '6');
-month_mapper.set('July', '7');
-month_mapper.set('August', '8');
-month_mapper.set('September', '9');
+month_mapper.set('January', '01');
+month_mapper.set('February', '02');
+month_mapper.set('March', '03');
+month_mapper.set('April', '04');
+month_mapper.set('May', '05');
+month_mapper.set('June', '06');
+month_mapper.set('July', '07');
+month_mapper.set('August', '08');
+month_mapper.set('September', '09');
 month_mapper.set('October', '10');
 month_mapper.set('November', '11');
 month_mapper.set('December', '12');
@@ -31,11 +31,21 @@ document.getElementById("calendar-days").addEventListener("click",function(e) {
     // TODO invoke the bootstrap modal
     var myModal = new bootstrap.Modal(document.getElementById('reminderModal'));
     var dateField = document.getElementById("id_date");
+    var relaterPersonField = document.getElementById("id_related_person_name");
+    var description = document.getElementById("id_description");
+    var monthlyReminder = document.getElementById("id_monthly_reminder");
+    var yearlyReminder = document.getElementById("id_yearly_reminder");
+    var eventType = document.getElementById("id_event_type");
 
 
     if (e.target.className != "calendar-day calendar-day--not-current"){
       myModal.show();
       dateField.value = completeDate;
+      relaterPersonField.value = "";
+      description.value = "";
+      monthlyReminder = false;
+      yearlyReminder = false;
+      eventType = "Birthday"
     }
   }
 });

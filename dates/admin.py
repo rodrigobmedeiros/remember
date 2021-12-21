@@ -9,10 +9,19 @@ admin.site.register(Profile)
 
 @admin.register(Reminder)
 class ReminderAdmin(admin.ModelAdmin):
-    list_display = ("date", "description", "related_person_name",
-                    "monthly_reminder", "yearly_reminder",
-                    "user", "event_type")
-    search_fields = ("description", "user__username",
-                     "event_type")
+    list_display = (
+        "date", 
+        "description", 
+        "related_person_name",
+        "monthly_reminder", "yearly_reminder",
+        "user", 
+        "event_type"
+    )
+    
+    search_fields = (
+        "description", 
+        "user__username",
+        "event_type"
+    )
 
 

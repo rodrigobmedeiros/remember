@@ -1,4 +1,5 @@
 import calendar
+import datetime
 
 from django.shortcuts import render, redirect
 from django.contrib import messages
@@ -20,10 +21,13 @@ def reminders(request):
 
     reminders = Reminder.objects.filter(
         user=user,
-        date__year=year,
-        date__month=month)
+        date__year__lte=year,
+        date__month=month
+    )
 
-    context = {"reminders": reminders}
+    context = {
+        "reminders": reminders,
+    }
     return render(
         request=request,
         template_name='dates/reminders.html',
@@ -33,22 +37,19 @@ def reminders(request):
 @login_required
 def main(request):
 
-    if request.method == 'POST':
-
-        reminder_form = ReminderForm(request.POST)
-
-        if reminder_form.is_valid():
-
-            reminder_form = reminder_form.save(commit=False)
-            reminder_form.user = request.user
-            reminder_form.save()
-            messages.success(request, ('Your reminder was successfully added!'))
-
     user = request.user
-    reminders = Reminder.objects.filter(user=user)
+    
+    # Get current month and year
+    today = datetime.datetime.now()
+
+    reminders = Reminder.objects.filter(
+        user=user,
+        date__year__lte=today.year,
+        date__month=today.month
+    )
 
     context = {
-        'reminders': reminders
+        'reminders': reminders,
     }
 
     return render(
@@ -61,5 +62,52 @@ def delete_reminder(request, id):
 
     reminder = Reminder.objects.filter(id=id)
     reminder.delete()
+    
+    user = request.user
+    month_name, year = request.GET["monthYear"].split(" ")
+    month = MONTH_NAMES_TO_NUMBERS[month_name[:3]]
 
-    return redirect('main')
+    reminders = Reminder.objects.filter(
+        user=user,
+        date__year__lte=year,
+        date__month=month
+    )
+
+    context = {
+        "reminders": reminders,
+    }
+    return render(
+        request=request,
+        template_name='dates/reminders.html',
+        context=context)
+
+@login_required
+def add_reminder(request):
+
+    user = request.user
+
+    reminder_form = ReminderForm(request.POST)
+
+    if reminder_form.is_valid():
+
+        reminder_form = reminder_form.save(commit=False)
+        reminder_form.user = user
+        reminder_form.save()
+        messages.success(request, ('Your reminder was successfully added!'))
+
+    month_name, year = request.POST["monthYear"].split(" ")
+    month = MONTH_NAMES_TO_NUMBERS[month_name[:3]]
+
+    reminders = Reminder.objects.filter(
+        user=user,
+        date__year__lte=year,
+        date__month=month
+    )
+
+    context = {
+        "reminders": reminders,
+    }
+    return render(
+        request=request,
+        template_name='dates/reminders.html',
+        context=context)

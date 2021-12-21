@@ -12,7 +12,14 @@
         hx-target="#reminderWrapper"
         hx-swap="innerHTML"
         ><</span>
-      <span id="present-month-selector">Today</span>
+      <span id="present-month-selector"
+        hx-get="/reminders/"
+        hx-trigger="click"
+        hx-vals='js:{monthYear: getMonthYear()}'
+        hx-target="#reminderWrapper"
+        hx-swap="innerHTML"
+        >Today
+      </span>
       <span id="next-month-selector"
         hx-get="/reminders/"
         hx-trigger="click"
