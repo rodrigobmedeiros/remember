@@ -74,5 +74,21 @@ def delete_reminder(request, id):
 
     reminder = Reminder.objects.filter(id=id)
     reminder.delete()
+    
+    user = request.user
+    month_name, year = request.GET["monthYear"].split(" ")
+    month = MONTH_NAMES_TO_NUMBERS[month_name[:3]]
 
-    return redirect('main')
+    reminders = Reminder.objects.filter(
+        user=user,
+        date__year__lte=year,
+        date__month=month
+    )
+
+    context = {
+        "reminders": reminders,
+    }
+    return render(
+        request=request,
+        template_name='dates/reminders.html',
+        context=context)
