@@ -38,18 +38,6 @@ def reminders(request):
 def main(request):
 
     user = request.user
-
-    if request.method == 'POST':
-
-        reminder_form = ReminderForm(request.POST)
-
-        if reminder_form.is_valid():
-
-            reminder_form = reminder_form.save(commit=False)
-            reminder_form.user = user
-            reminder_form.save()
-            messages.success(request, ('Your reminder was successfully added!'))
-
     
     # Get current month and year
     today = datetime.datetime.now()
