@@ -59,8 +59,12 @@ def main(request):
 
 @login_required
 def delete_reminder(request, id):
+    #TODO include user in the filter
+    reminder = Reminder.objects.filter(
+        user = request.user,
+        id=id
+    )
 
-    reminder = Reminder.objects.filter(id=id)
     reminder.delete()
     
     user = request.user
