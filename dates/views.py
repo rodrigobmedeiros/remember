@@ -120,8 +120,7 @@ def add_reminder(request):
 @login_required
 def profile(request):
 
-    text = """
-        Hello, world!
-    """
-
-    return HttpResponse(text)
+    return render(
+        request=request,
+        template_name='dates/profile.html'
+    )
