@@ -1,5 +1,6 @@
 import calendar
 import datetime
+from django.http.response import HttpResponse
 
 from django.shortcuts import render, redirect
 from django.contrib import messages
@@ -115,3 +116,12 @@ def add_reminder(request):
         request=request,
         template_name='dates/reminders.html',
         context=context)
+
+@login_required
+def profile(request):
+
+    text = """
+        Hello, world!
+    """
+
+    return HttpResponse(text)
