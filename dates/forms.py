@@ -1,4 +1,4 @@
-from .models import Reminder
+from .models import Reminder, Profile, User
 from django.forms import ModelForm, widgets
 
 class ReminderForm(ModelForm):
@@ -17,3 +17,11 @@ class ReminderForm(ModelForm):
         widgets = {
             'date': widgets.DateInput(attrs={'type': 'date'})
         }
+
+class UserForm(ModelForm):
+
+    class Meta:
+        model = User 
+
+class ProfileForm(ModelForm):
+    pass
