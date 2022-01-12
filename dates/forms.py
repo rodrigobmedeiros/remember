@@ -21,7 +21,7 @@ class ReminderForm(ModelForm):
 class UserForm(ModelForm):
 
     class Meta:
-        model = User 
+        model = User
         fields = (
             'first_name',
             'last_name',
@@ -29,5 +29,8 @@ class UserForm(ModelForm):
             'email'
         )
 
-class ProfileForm(ModelForm):
-    pass
+    
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['username'].widget.attrs.update({'readonly': True})
+        self.fields['email'].widget.attrs.update({'readonly': True})
