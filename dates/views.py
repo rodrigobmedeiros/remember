@@ -126,9 +126,21 @@ def profile(request):
 
     # print(user_info)
 
-    user_form = UserForm(
-        instance=user
-    )
+    if request.method == 'POST':
+
+        user_form = UserForm(request.POST, instance=user)
+
+        if user_form.is_valid():
+
+            user_form.save()
+            messages.success(request, ('Profile Updated!'))
+
+    else:
+
+        user_form = UserForm(
+            instance=user
+        )
+
 
     context = {
         'user_form': user_form
