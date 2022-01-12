@@ -6,7 +6,7 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 
-from .forms import ReminderForm
+from .forms import ReminderForm, UserForm
 from .models import Reminder
 
 MONTH_NAMES_TO_NUMBERS = {
@@ -120,7 +120,23 @@ def add_reminder(request):
 @login_required
 def profile(request):
 
+    user = request.user
+
+    # user_info = request.user.__class__.objects.filter(pk=request.user.id).values().first()
+
+    # print(user_info)
+
+    user_form = UserForm(
+        instance=user
+    )
+
+    context = {
+        'user_form': user_form
+    }
+
+
     return render(
         request=request,
-        template_name='dates/profile.html'
+        template_name='dates/profile.html',
+        context=context
     )
