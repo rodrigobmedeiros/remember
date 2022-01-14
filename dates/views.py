@@ -143,7 +143,7 @@ def profile(request):
     else:
 
         user_form = UserForm(instance=user)
-        profle_form = ProfileForm(instance=profile) if profile else ProfileForm()
+        profile_form = ProfileForm(instance=profile) if profile else ProfileForm()
 
 
 
