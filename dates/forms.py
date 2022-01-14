@@ -26,3 +26,11 @@ class UserForm(ModelForm):
             'first_name',
             'last_name',
         )
+
+class ProfileForm(ModelForm):
+
+    class Meta:
+        model = Profile
+        fields = (
+            'nickname',
+        )
