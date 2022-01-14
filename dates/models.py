@@ -20,7 +20,7 @@ class EventTypeOptions(models.TextChoices):
 
 class Profile(models.Model):
 
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user = models.OneToOneField(User, on_delete=models.CASCADE, null=True)
     nickname = models.CharField(max_length=30, help_text="How would you like to be called")
 
 class Contact(models.Model):
