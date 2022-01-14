@@ -123,36 +123,25 @@ def profile(request):
     user = request.user
     profile = Profile.objects.filter(user=user).first()
 
-    print(profile)
-
-    # user_info = request.user.__class__.objects.filter(pk=request.user.id).values().first()
-
-    # print(user_info)
-
-    if request.method == 'POST':
+    if request.POST:
 
         user_form = UserForm(request.POST, instance=user)
-        profile_form = ProfileForm(request.POST, instance=profile) if profile else ProfileForm(request.POST)
+        profile_form = ProfileForm(request.POST, instance=profile)
 
-        if user_form.is_valid() & profile_form.is_valid():
+        if user_form.is_valid() and profile_form.is_valid():
 
-            user_form.save()
+            profile_form.instance.user = user
             profile_form.save()
-            messages.success(request, ('Profile Updated!'))
 
     else:
 
         user_form = UserForm(instance=user)
-        profile_form = ProfileForm(instance=profile) if profile else ProfileForm()
-
-
-
+        profile_form = ProfileForm(instance=profile)
 
     context = {
         'user_form': user_form,
         'profile_form': profile_form
     }
-
 
     return render(
         request=request,
