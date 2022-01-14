@@ -25,12 +25,4 @@ class UserForm(ModelForm):
         fields = (
             'first_name',
             'last_name',
-            'username',
-            'email'
         )
-
-    
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.fields['username'].widget.attrs.update({'readonly': True})
-        self.fields['email'].widget.attrs.update({'readonly': True})
