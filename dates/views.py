@@ -6,8 +6,8 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 
-from .forms import ReminderForm, UserForm
-from .models import Reminder
+from .forms import ReminderForm, UserForm, ProfileForm
+from .models import Profile, Reminder
 
 MONTH_NAMES_TO_NUMBERS = {
     v: k for k, v in enumerate(calendar.month_abbr[1:], start=1)
@@ -121,6 +121,9 @@ def add_reminder(request):
 def profile(request):
 
     user = request.user
+    profile = Profile.objects.filter(user=user).first()
+
+    print(profile)
 
     # user_info = request.user.__class__.objects.filter(pk=request.user.id).values().first()
 
@@ -129,21 +132,25 @@ def profile(request):
     if request.method == 'POST':
 
         user_form = UserForm(request.POST, instance=user)
+        profile_form = ProfileForm(request.POST, instance=profile) if profile else ProfileForm(request.POST)
 
-        if user_form.is_valid():
+        if user_form.is_valid() & profile_form.is_valid():
 
             user_form.save()
+            profile_form.save()
             messages.success(request, ('Profile Updated!'))
 
     else:
 
-        user_form = UserForm(
-            instance=user
-        )
+        user_form = UserForm(instance=user)
+        profle_form = ProfileForm(instance=profile) if profile else ProfileForm()
+
+
 
 
     context = {
-        'user_form': user_form
+        'user_form': user_form,
+        'profile_form': profile_form
     }
 
 
