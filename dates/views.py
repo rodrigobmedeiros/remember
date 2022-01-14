@@ -6,7 +6,7 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 
-from .forms import ReminderForm, UserForm, ProfileForm
+from .forms import ReminderForm, UserForm, ProfileForm, ContactForm
 from .models import Profile, Reminder
 
 MONTH_NAMES_TO_NUMBERS = {
@@ -146,5 +146,22 @@ def profile(request):
     return render(
         request=request,
         template_name='dates/profile.html',
+        context=context
+    )
+
+@login_required
+def contact(request):
+
+    user = request.user
+
+    contact_form = ContactForm(request.POST)
+
+    context = {
+        'contact_form': contact_form 
+    }
+
+    return render(
+        request=request,
+        template_name='dates/contact.html',
         context=context
     )
