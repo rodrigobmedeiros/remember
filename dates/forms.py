@@ -42,5 +42,5 @@ class ContactForm(ModelForm):
         model = Contact 
         fields = (
             'phone_number',
-            'messagem_type'
+            'message_type'
         )
