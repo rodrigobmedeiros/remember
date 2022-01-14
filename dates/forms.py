@@ -1,4 +1,4 @@
-from .models import Reminder, Profile, User
+from .models import Reminder, Profile, User, Contact
 from django.forms import ModelForm, widgets
 
 class ReminderForm(ModelForm):
@@ -33,4 +33,14 @@ class ProfileForm(ModelForm):
         model = Profile
         fields = (
             'nickname',
+        )
+
+class ContactForm(ModelForm):
+
+    class Meta:
+
+        model = Contact 
+        fields = (
+            'phone_number',
+            'messagem_type'
         )
