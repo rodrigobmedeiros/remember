@@ -130,7 +130,7 @@ def profile(request):
 
         if user_form.is_valid() and profile_form.is_valid():
 
-            profile_form.instance.user = user
+            user_form.save()
             profile_form.save()
 
     else:
