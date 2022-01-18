@@ -7,7 +7,7 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 
 from .forms import ReminderForm, UserForm, ProfileForm, ContactForm
-from .models import Profile, Reminder
+from .models import Contact, Profile, Reminder
 
 MONTH_NAMES_TO_NUMBERS = {
     v: k for k, v in enumerate(calendar.month_abbr[1:], start=1)
@@ -153,9 +153,19 @@ def profile(request):
 def contact(request):
 
     user = request.user
+    contact = Contact.objects.filter(user=user).first()
 
-    contact_form = ContactForm(request.POST)
+    if request.POST:
 
+        contact_form = ContactForm(request.POST, instance=contact)
+
+        if contact_form.is_valid():
+
+            contact_form.instance.user = user
+            contact_form.save()
+
+    contact_form = ContactForm(instance=contact)
+    
     context = {
         'contact_form': contact_form 
     }
