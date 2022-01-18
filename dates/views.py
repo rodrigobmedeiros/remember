@@ -1,12 +1,13 @@
 import calendar
 import datetime
+from django.http.response import HttpResponse
 
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 
-from .forms import ReminderForm
-from .models import Reminder
+from .forms import ReminderForm, UserForm, ProfileForm, ContactForm
+from .models import Profile, Reminder
 
 MONTH_NAMES_TO_NUMBERS = {
     v: k for k, v in enumerate(calendar.month_abbr[1:], start=1)
@@ -59,8 +60,12 @@ def main(request):
 
 @login_required
 def delete_reminder(request, id):
+    #TODO include user in the filter
+    reminder = Reminder.objects.filter(
+        user = request.user,
+        id=id
+    )
 
-    reminder = Reminder.objects.filter(id=id)
     reminder.delete()
     
     user = request.user
@@ -111,3 +116,52 @@ def add_reminder(request):
         request=request,
         template_name='dates/reminders.html',
         context=context)
+
+@login_required
+def profile(request):
+
+    user = request.user
+    profile = Profile.objects.filter(user=user).first()
+
+    if request.POST:
+
+        user_form = UserForm(request.POST, instance=user)
+        profile_form = ProfileForm(request.POST, instance=profile)
+
+        if user_form.is_valid() and profile_form.is_valid():
+
+            user_form.save()
+            profile_form.save()
+
+    else:
+
+        user_form = UserForm(instance=user)
+        profile_form = ProfileForm(instance=profile)
+
+    context = {
+        'user_form': user_form,
+        'profile_form': profile_form
+    }
+
+    return render(
+        request=request,
+        template_name='dates/profile.html',
+        context=context
+    )
+
+@login_required
+def contact(request):
+
+    user = request.user
+
+    contact_form = ContactForm(request.POST)
+
+    context = {
+        'contact_form': contact_form 
+    }
+
+    return render(
+        request=request,
+        template_name='dates/contact.html',
+        context=context
+    )
