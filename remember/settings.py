@@ -39,7 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.sites',
-    # 3rd party
+    # 3rd part
     'phonenumber_field',
     'crispy_forms',
     'allauth',
@@ -59,7 +59,6 @@ BOOTSTRAP5 = {
         "integrity": "sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I",
         "crossorigin": "anonymous",
     },
-
     # The complete URL to the Bootstrap JavaScript file
     "javascript_url": {
         "url": "https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js",
