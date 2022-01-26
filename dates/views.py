@@ -39,7 +39,7 @@ def reminders(request):
 def main(request):
 
     user = request.user
-    
+
     # Get current month and year
     today = datetime.datetime.now()
 
@@ -67,7 +67,7 @@ def delete_reminder(request, id):
     )
 
     reminder.delete()
-    
+
     user = request.user
     month_name, year = request.GET["monthYear"].split(" ")
     month = MONTH_NAMES_TO_NUMBERS[month_name[:3]]
@@ -131,7 +131,9 @@ def profile(request):
         if user_form.is_valid() and profile_form.is_valid():
 
             user_form.save()
-            profile_form.save()
+            profile = profile_form.save(commit=False)
+            profile.user = user
+            profile.save()
 
     else:
 
@@ -165,9 +167,9 @@ def contact(request):
             contact_form.save()
 
     contact_form = ContactForm(instance=contact)
-    
+
     context = {
-        'contact_form': contact_form 
+        'contact_form': contact_form
     }
 
     return render(
