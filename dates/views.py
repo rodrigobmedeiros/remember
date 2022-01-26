@@ -131,6 +131,7 @@ def profile(request):
         if user_form.is_valid() and profile_form.is_valid():
 
             user_form.save()
+            profile_form.instance.user = user
             profile_form.save()
 
     else:
@@ -164,7 +165,9 @@ def contact(request):
             contact_form.instance.user = user
             contact_form.save()
 
-    contact_form = ContactForm(instance=contact)
+    else:
+        
+        contact_form = ContactForm(instance=contact)
     
     context = {
         'contact_form': contact_form 
