@@ -165,7 +165,9 @@ def contact(request):
             contact_form.instance.user = user
             contact_form.save()
 
-    contact_form = ContactForm(instance=contact)
+    else:
+        
+        contact_form = ContactForm(instance=contact)
     
     context = {
         'contact_form': contact_form 
