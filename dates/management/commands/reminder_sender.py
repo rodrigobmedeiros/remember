@@ -1,4 +1,5 @@
 from django.core.management import BaseCommand
+import datetime
 
 
 class Command(BaseCommand):
@@ -11,6 +12,12 @@ class Command(BaseCommand):
 
         # TODO: 
         # 1 - get current day
+
+        today = datetime.datetime.now()
+        print(today.day)
+        print(today.month)
+        print(today.year)
+
         # 2 - get all reminders that must be send for that day
         #   2.1 - analyze day if reminder is monthly
         #   2.2 - verify day and month if reminder is yearly
