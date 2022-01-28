@@ -1,7 +1,7 @@
 from django.core.management import BaseCommand
 from django.conf import settings
 from django.db.models import Q
-from dates.models import Reminder
+from dates.models import Reminder, Contact
 from twilio.rest import Client
 import datetime
 
@@ -18,7 +18,6 @@ class Command(BaseCommand):
         # 1 - get current day
 
         today = datetime.datetime.now()
-        print(f'{today.day}/{today.month}/{today.year}')
 
         # 2 - get all reminders that must be send for that day
         #   2.1 - analyze day if reminder is monthly
@@ -29,20 +28,30 @@ class Command(BaseCommand):
 
         reminders = Reminder.objects.filter(monthly_condition | yearly_condition)
 
-        print(reminders)
-
         # 3 - Connect with twilio
         twilio_client = Client(settings.TWILIO_ACCOUNT_SID, settings.TWILIO_AUTH_TOKEN)
 
-        message = twilio_client.messages.create(
-            body='Hello there!',
-            from_=f'whatsapp:{settings.TWILIO_NUMBER}',
-            to=f'whatsapp:+5521990536432'
-        )
         
+        users_contacts = dict()
+
         # For each reminder
-        # 4 - get user
-        # 5 - get contact for this user
-        # 6 - create a twilio client with this info
-        # 7 - create a message based on user and reminder
-        # 8 - send messages
+        for reminder in reminders:
+            
+            # 4 - get user
+            user = reminder.user
+
+            # 5 - get contact for this user
+            contact = users_contacts.setdefault(user, Contact.objects.filter(user=user).first().phone_number)
+            
+            # 6 - create a message based on user and reminder
+            message = f'related_name: {reminder.related_person_name}\n'
+            message += f"Don't forget the {reminder.event_type}\n"
+            message += f'Date: {reminder.date}'
+
+            # 7 - send message       
+            twilio_message = twilio_client.messages.create(
+                body=message,
+                from_=f'whatsapp:{settings.TWILIO_NUMBER}',
+                to=f'whatsapp:{contact}'
+
+            )
