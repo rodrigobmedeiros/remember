@@ -2,7 +2,7 @@ from django.core.management import BaseCommand
 from django.conf import settings
 from django.db.models import Q
 from dates.models import Reminder
-
+from twilio.rest import Client
 import datetime
 
 
@@ -32,12 +32,14 @@ class Command(BaseCommand):
         print(reminders)
 
         # 3 - Connect with twilio
-        twilio_account_sid = settings.TWILIO_ACCOUNT_SID
-        twilio_auth_token = settings.TWILIO_AUTH_TOKEN
+        twilio_client = Client(settings.TWILIO_ACCOUNT_SID, settings.TWILIO_AUTH_TOKEN)
 
-        print(twilio_account_sid)
-        print(twilio_auth_token)
-
+        message = twilio_client.messages.create(
+            body='Hello there!',
+            from_=f'whatsapp:{settings.TWILIO_NUMBER}',
+            to=f'whatsapp:+5521990536432'
+        )
+        
         # For each reminder
         # 4 - get user
         # 5 - get contact for this user
