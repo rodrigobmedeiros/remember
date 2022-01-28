@@ -55,3 +55,6 @@ class Command(BaseCommand):
                 to=f'whatsapp:{contact}'
 
             )
+
+            # TODO:
+            # Persist all send events into event table
