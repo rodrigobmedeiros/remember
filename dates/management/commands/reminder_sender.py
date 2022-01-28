@@ -1,4 +1,5 @@
 from django.core.management import BaseCommand
+from django.conf import settings
 from django.db.models import Q
 from dates.models import Reminder
 
@@ -17,6 +18,7 @@ class Command(BaseCommand):
         # 1 - get current day
 
         today = datetime.datetime.now()
+        print(f'{today.day}/{today.month}/{today.year}')
 
         # 2 - get all reminders that must be send for that day
         #   2.1 - analyze day if reminder is monthly
@@ -30,6 +32,12 @@ class Command(BaseCommand):
         print(reminders)
 
         # 3 - Connect with twilio
+        twilio_account_sid = settings.TWILIO_ACCOUNT_SID
+        twilio_auth_token = settings.TWILIO_AUTH_TOKEN
+
+        print(twilio_account_sid)
+        print(twilio_auth_token)
+
         # For each reminder
         # 4 - get user
         # 5 - get contact for this user
