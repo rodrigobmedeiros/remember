@@ -24,11 +24,8 @@ class Command(BaseCommand):
 
         
         contacts = Contact.objects.all().select_related('user')
-        user_contacts = {}
 
-        for contact in contacts:
-
-            user_contacts[contact.user] = contact.phone_number
+        user_contacts = {contact.user:contact.phone_number for contact in contacts}
 
         # Loop through all reminders for specific day.
         # Get reminder's user
@@ -51,16 +48,13 @@ class Command(BaseCommand):
             )
             
             event = Event()
-            try:
-                twilio_message = twilio_client.messages.create(
+            event.reminder_event = reminder 
+
+            twilio_message = twilio_client.messages.create(
                     body=message,
                     from_=f'whatsapp:{settings.TWILIO_NUMBER}',
                     to=f'whatsapp:{contact}'
                 )
-                event.reminder_event = reminder 
-                event.successfully_sent = True  
-            except:
-                event.reminder_event = reminder 
-                event.successfully_sent = False    
-            finally:
-                event.save()       
+
+            event.successfully_sent = True  
+            event.save()
