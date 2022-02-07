@@ -3,10 +3,11 @@ from django.contrib import admin
 # Register your models here.
 
 
-from dates.models import Reminder, Profile, Contact
+from dates.models import Reminder, Profile, Contact, Event
 # Register your models to admin site, then you can add, edit, delete and search your models in Django admin site.
 admin.site.register(Profile)
 admin.site.register(Contact)
+admin.site.register(Event)
 
 @admin.register(Reminder)
 class ReminderAdmin(admin.ModelAdmin):

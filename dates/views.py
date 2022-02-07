@@ -14,7 +14,7 @@ MONTH_NAMES_TO_NUMBERS = {
 }
 
 
-@login_required
+@login_required(login_url='/accounts/login/')
 def reminders(request):
     user = request.user
     month_name, year = request.GET["monthYear"].split(" ")
@@ -35,7 +35,7 @@ def reminders(request):
         context=context)
 
 
-@login_required
+@login_required(login_url='/accounts/login/')
 def main(request):
 
     user = request.user
@@ -58,7 +58,7 @@ def main(request):
         template_name='dates/main.html',
         context=context)
 
-@login_required
+@login_required(login_url='/accounts/login/')
 def delete_reminder(request, id):
     #TODO include user in the filter
     reminder = Reminder.objects.filter(
@@ -86,7 +86,7 @@ def delete_reminder(request, id):
         template_name='dates/reminders.html',
         context=context)
 
-@login_required
+@login_required(login_url='/accounts/login/')
 def add_reminder(request):
 
     user = request.user
@@ -117,7 +117,7 @@ def add_reminder(request):
         template_name='dates/reminders.html',
         context=context)
 
-@login_required
+@login_required(login_url='/accounts/login/')
 def profile(request):
 
     user = request.user
@@ -151,7 +151,7 @@ def profile(request):
         context=context
     )
 
-@login_required
+@login_required(login_url='/accounts/login/')
 def contact(request):
 
     user = request.user

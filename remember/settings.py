@@ -124,6 +124,7 @@ AUTHENTICATION_BACKENDS = [
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
+LOGIN_URL = ''
 LOGIN_REDIRECT_URL = '/main/'
 ACCOUNT_LOGOUT_REDIRECT_URL ='/accounts/login'
 
@@ -189,3 +190,4 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 TWILIO_ACCOUNT_SID = config('TWILIO_ACCOUNT_SID')
 TWILIO_AUTH_TOKEN = config('TWILIO_AUTH_TOKEN')
+TWILIO_NUMBER = config('TWILIO_NUMBER')
