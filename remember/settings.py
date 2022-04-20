@@ -42,10 +42,12 @@ INSTALLED_APPS = [
     # 3rd part
     'phonenumber_field',
     'crispy_forms',
+    "allauth_ui",
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
     'bootstrap5',
+    "widget_tweaks",
     # own apps
     'dates',
 ]
@@ -103,7 +105,7 @@ TEMPLATES = [
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
             os.path.join(BASE_DIR, 'remember/templates'),
-            os.path.join(BASE_DIR, 'remember/templates/allauth')
+            # os.path.join(BASE_DIR, 'remember/templates/allauth')
         ],
         'APP_DIRS': True,
         'OPTIONS': {
